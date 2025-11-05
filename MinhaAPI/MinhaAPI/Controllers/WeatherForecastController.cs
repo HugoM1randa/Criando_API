@@ -52,5 +52,39 @@ namespace MinhaAPI.Controllers
         {
             return $"O dobro do numero {numero} é {numero * 2}";
         }
+        [HttpGet("DataFutura")]
+        public string GetdataFutura(int numeroDias)
+        {
+            var dataFutura = DateTime.Now.AddDays(numeroDias);
+            return $"Daqui a {numeroDias} dias será {dataFutura:dd/MM/yyyy}.";
+        }
+        [HttpGet("TemperaturaFahrenheit")]
+        public string GettemperaturaFahrenheit(double Celsius)
+        {
+            return $"A temperatura em Celsius é de {Celsius} e a em Fahrenheit é de {(Celsius * 9/5) + 32}";
+        }
+
+        [HttpGet("CalcularMedia")]
+        public string GetcalcularMedia(double a, double b, double c)
+        {
+            return $"A média dos numeros {a}, {b} e {c} é de {(a + b + c) / 3}";
+        }
+
+        [HttpGet("DiaUtil")]
+        public string DiaUtil()
+        {
+            var cultura = new System.Globalization.CultureInfo("pt-BR");
+            var diaSemana = DateTime.Today.DayOfWeek;
+            var nomeDia = DateTime.Today.ToString("dddd", cultura);
+
+            if (diaSemana >= DayOfWeek.Monday && diaSemana <= DayOfWeek.Friday)
+            {
+                return $"Hoje é {nomeDia}, um dia útil.";
+            }
+            else
+            {
+                return $"Hoje é {nomeDia}, fim de semana.";
+            }
+        }
     }
 }
